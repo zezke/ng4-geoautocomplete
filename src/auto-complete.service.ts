@@ -19,7 +19,7 @@ export class AutoCompleteSearchService {
       .subscribe((data: any) => {
         if (data) {
           resolve(data);
-        }else {
+        } else {
           resolve(false);
         }
       });
@@ -34,7 +34,7 @@ export class AutoCompleteSearchService {
       .subscribe((data: any) => {
         if (data) {
           resolve(data);
-        }else {
+        } else {
           resolve(false);
         }
       });
@@ -49,7 +49,7 @@ export class AutoCompleteSearchService {
       .subscribe((data: any) => {
         if (data) {
           resolve(data);
-        }else {
+        } else {
           resolve(false);
         }
       });
@@ -67,10 +67,10 @@ export class AutoCompleteSearchService {
           }, (error) => {
             resolve(false);
           });
-        }else {
+        } else {
           resolve(false);
         }
-      }else {
+      } else {
         resolve(false);
       }
     });
@@ -86,7 +86,7 @@ export class AutoCompleteSearchService {
             this.getGeoPlaceDetail(results[0].place_id).then((result) => {
               if (result) {
                 resolve(result);
-              }else {
+              } else {
                 resolve(false);
               }
             });
@@ -94,7 +94,7 @@ export class AutoCompleteSearchService {
             resolve(false);
           }
         });
-      }else {
+      } else {
         resolve(false);
       }
     });
@@ -112,7 +112,7 @@ export class AutoCompleteSearchService {
             input: params.query,
             componentRestrictions: {country: params.countryRestriction},
           };
-        }else {
+        } else {
            queryInput = {
              input: params.query
           };
@@ -127,7 +127,7 @@ export class AutoCompleteSearchService {
               _tempQuery['types'] = new Array(params.geoTypes[i]);
               promiseArr.push(this.geoPredictionCall(placesService, _tempQuery));
           }
-        }else {
+        } else {
           promiseArr.push(this.geoPredictionCall(placesService, queryInput));
         }
 
@@ -142,11 +142,11 @@ export class AutoCompleteSearchService {
               }
               _tempArr = this.getUniqueResults(_tempArr);
               resolve(_tempArr);
-            }else {
+            } else {
               resolve(values[0]);
             }
         });
-      }else {
+      } else {
         resolve(false);
       }
     });
@@ -162,15 +162,15 @@ export class AutoCompleteSearchService {
             this.getGeoPaceDetailByReferance(result.referance).then((referanceData: any) => {
               if (!referanceData) {
                 resolve(false);
-              }else {
+              } else {
                 resolve(referanceData);
               }
             });
-          }else {
+          } else {
             resolve(result);
           }
         });
-      }else {
+      } else {
         resolve(false);
       }
     });
@@ -184,11 +184,11 @@ export class AutoCompleteSearchService {
         placesService.getDetails({'reference': referance}, (result: any, status: any) => {
           if (status === _window.google.maps.places.PlacesServiceStatus.OK) {
             resolve(result);
-          }else {
+          } else {
             resolve(false);
           }
         });
-      }else {
+      } else {
         resolve(false);
       }
     });
@@ -210,7 +210,7 @@ export class AutoCompleteSearchService {
         this._localStorageService.setItem(localStorageName, JSON.stringify(data));
       }
     });
-  };
+  }
 
 
   getRecentList(localStorageName: string): Promise<any> {
@@ -235,7 +235,7 @@ export class AutoCompleteSearchService {
       placesService.getPlacePredictions(queryInput, (result: any, status: any) => {
           if (status === _window.google.maps.places.PlacesServiceStatus.OK) {
             resolve(result);
-          }else {
+          } else {
             resolve(false);
           }
         });

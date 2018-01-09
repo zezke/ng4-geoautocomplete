@@ -359,7 +359,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
       this.userSelectedOption = '';
       if (this.settings.showRecentSearch) {
         this.showRecentSearch();
-      }else {
+      } else {
         this.dropdownOpen = false;
       }
     }
@@ -371,7 +371,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
       if (index === i) {
         this.queryItems[i].active = true;
         this.selectedDataIndex = index;
-      }else {
+      } else {
         this.queryItems[i].active = false;
       }
     }
@@ -382,7 +382,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
     this.dropdownOpen = false;
     if (this.recentDropdownOpen) {
       this.setRecentLocation(this.queryItems[index]);
-    }else {
+    } else {
       this.getPlaceLocationInfo(this.queryItems[index]);
     }
   }
@@ -400,7 +400,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
     let _userOption: any = selectedOption === 'false' ? '' : this.userSelectedOption;
     if (_userOption) {
       this.componentCallback.emit({'response': true, 'data': this.userSelectedOption});
-    }else {
+    } else {
       this.componentCallback.emit({'response': false, 'reason': 'No user input'});
     }
   }
@@ -414,7 +414,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
         if (!result) {
           this.gettingCurrentLocationFlag = false;
           this.componentCallback.emit({'response': false, 'reason': 'Failed to get geo location'});
-        }else {
+        } else {
           this.getCurrentLocationInfo(result);
         }
       });
@@ -465,7 +465,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
     if (this.queryItems.length) {
       if (this.selectedDataIndex > -1) {
         this.selectedListNode(this.selectedDataIndex);
-      }else {
+      } else {
         this.selectedListNode(0);
       }
     }
@@ -480,7 +480,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
         _tempObj[value] = (this.userSettings[value] !== undefined) ? this.userSettings[value] : this.defaultSettings[value];
       }
       return _tempObj;
-    }else {
+    } else {
       return this.defaultSettings;
     }
   }
@@ -501,7 +501,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
       this._autoCompleteSearchService.getGeoPrediction(_tempParams).then((result) => {
         this.updateListItem(result);
       });
-    }else {
+    } else {
       this._autoCompleteSearchService.getPredictions(this.settings.geoPredictionServerUrl, value).then((result) => {
         result = this.extractServerList(this.settings.serverResponseListHierarchy, result);
         this.updateListItem(result);
@@ -517,7 +517,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
         _tempData = _tempData[key];
       }
       return _tempData;
-    }else {
+    } else {
       return data;
     }
   }
@@ -535,7 +535,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
     this._autoCompleteSearchService.getRecentList(this.settings.recentStorageName).then((result: any) => {
       if (result) {
         this.queryItems = result;
-      }else {
+      } else {
         this.queryItems = [];
       }
     });
@@ -550,10 +550,10 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
         arrayIndex = ((this.selectedDataIndex + 1) <= (this.queryItems.length - 1)) ? (this.selectedDataIndex + 1) : 0;
       }
       this.activeListNode(arrayIndex);
-    }else if (keyCode === 38) {//arrow up
+    } else if (keyCode === 38) {//arrow up
       if (this.selectedDataIndex >= 0) {
         arrayIndex = ((this.selectedDataIndex - 1) >= 0) ? (this.selectedDataIndex - 1) : (this.queryItems.length - 1);
-      }else {
+      } else {
         arrayIndex = this.queryItems.length - 1;
       }
       this.activeListNode(arrayIndex);
@@ -571,7 +571,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
         }
         this.gettingCurrentLocationFlag = false;
       });
-    }else {
+    } else {
       this._autoCompleteSearchService.getLatLngDetail(this.settings.geoLatLangServiceUrl, latlng.lat, latlng.lng).then((result: any) => {
         if (result) {
           result = this.extractServerList(this.settings.serverResponseatLangHierarchy, result);
@@ -590,7 +590,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges {
           this.setRecentLocation(data);
         }
       });
-    }else {
+    } else {
       this._autoCompleteSearchService.getPlaceDetails(this.settings.geoLocDetailServerUrl, selectedData.place_id).then((result: any) => {
         if (result) {
           result = this.extractServerList(this.settings.serverResponseDetailHierarchy, result);
